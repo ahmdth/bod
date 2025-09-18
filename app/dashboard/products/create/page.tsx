@@ -35,12 +35,12 @@ const FormSchema = z.object({
   image: z.string().min(1, "Please upload an image"),
 })
 
-export default function Page() {
-  const searchParams = useSearchParams()
-  const id = searchParams.get("id")
+export default function Page({ searchParams }: { searchParams: Promise<{ id?: string }> }) {
+  const params = React.use(searchParams)
+  const id = params.id
 
   const queryClient = useQueryClient()
-  
+
   const maxSizeMB = 2
   const maxSize = maxSizeMB * 1024 * 1024 // 2MB default
 
